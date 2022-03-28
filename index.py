@@ -1,22 +1,25 @@
 # importing required modules.
+from email import message
 import serial # Reading to and writing from the serial stream
 import requests # Sending web requests
 
 # contants
 # TODO: Modify based on your settings. 
-PORT_NAME = 'COM3'
+PORT_NAME = '/dev/ttyUSB0'
 BAUDRATE  = 9600
 TIMEOUT = .1
-WEBHOOK_URL = "https://maker.ifttt.com/trigger/soil_moisture_changed/json/with/key/pTWdShVd6Lx8Bg6SDh8Wo7gApQ3wR1achlY-ke1oYUT"
+WEBHOOK_URL = "http://localhost:3000/messages"
 
 # Simple method for sending the web request to the IFTTT webhook. 
 def handleRawData(data: str) -> None:
-    number, name = data.strip().split(" ")
+    message_text, message_stream_id = data.strip().split("#")
+    print(message_text, message_stream_id)
     payload = {
-        "number": number,
-        "name": name 
+        "message_text": message_text,
+        "message_stream_id": message_stream_id
     }
-    response = requests.post(WEBHOOK_URL, payload)
+
+    response = requests.post(WEBHOOK_URL, json=payload)
     print(response.text)
     
 # Open the serial port.
