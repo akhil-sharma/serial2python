@@ -9,7 +9,7 @@ void setup() {
 
 void loop() {
   //
-  char message_stream_code[] = "6240fd80e4440ac4daa4fb6e";
+  char message_stream_code[] = "";
   char message_text[] = "This is a sample message text sent from arduino.";
   
   Serial.print(message_text);

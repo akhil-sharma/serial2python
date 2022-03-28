@@ -8,7 +8,7 @@ import requests # Sending web requests
 PORT_NAME = '/dev/ttyUSB0'
 BAUDRATE  = 9600
 TIMEOUT = .1
-WEBHOOK_URL = "http://localhost:3000/messages"
+WEBHOOK_URL = "https://test-twi-server.herokuapp.com/messages"
 
 # Simple method for sending the web request to the IFTTT webhook. 
 def handleRawData(data: str) -> None:
